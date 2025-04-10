@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Авторизация - {{ block.super }}{% endblock %}
+
+{% block page_description %}Авторизация - {{ block.super }}{% endblock %}
+
+{% block content %}
+  <h1>Страница авторизации</h1>
+  <div class="form-container">
+    <h2>Вход</h2>
+    {% if form.non_field_errors %}
+      <div class="error">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <div>
+        {{ form.email.label_tag }}<br>
+        {{ form.email }}
+        {% if form.email.errors %}
+          <div class="error">{{ form.email.errors }}</div>
+        {% endif %}
+      </div>
+      <div>
+        {{ form.password.label_tag }}<br>
+        {{ form.password }}
+        {% if form.password.errors %}
+          <div class="error">{{ form.password.errors }}</div>
+        {% endif %}
+      </div>
+      <button type="submit">Войти</button>
+    </form>
+  </div>
+{% endblock %}

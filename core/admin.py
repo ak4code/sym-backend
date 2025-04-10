@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from core.models import User
+from core.models import User, Follow
 
 
 @admin.register(User)
@@ -26,3 +26,12 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions')
     readonly_fields = ('created_at', 'updated_at', 'last_login')
+
+
+@admin.register(Follow)
+class FollowAdmin(admin.ModelAdmin):
+    """Админка подписок"""
+    list_display = ('__str__', 'created_at')
+    list_select_related = ('follower', 'following')
+    raw_id_fields = ('follower', 'following')
+    search_fields = ('follower__email', 'following__email')
