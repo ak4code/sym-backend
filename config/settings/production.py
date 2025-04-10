@@ -1,6 +1,6 @@
 from config.settings.base import BASE_DIR, env
 
-DEBUG = env.bool('DEBUG', default=True)
+DEBUG = env.bool('DEBUG', default=False)
 
 
 STATIC_URL = '/static/'
